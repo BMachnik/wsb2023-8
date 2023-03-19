@@ -1,0 +1,46 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageName": {
+            "type": "string",
+            "metadata": {
+                "description": "Nazwa konta storage"
+            }
+        },
+        "publicAccess": {
+            "type": "string",
+            "defaultValue": true,
+            "allowedValues":[
+                "true", "false"
+            ],
+            "metadata": {
+                "description": "Czy publiczne"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "name": "[toLower(parameters('storageName'))]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2021-04-01",
+            "tags": {
+                "displayName": "wsbstorageaccount"
+            },
+            "location": "[resourceGroup().location]",
+            "kind": "StorageV2",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "properties":{
+                "supportsHttpsTrafficOnly": "true",
+                "allowBlobPublicAccess": "[parameters('publicAccess')]"
+            }
+        }
+        
+    ],
+    "outputs": {}
+}

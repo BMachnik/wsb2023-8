@@ -1,0 +1,1 @@
+bicep build "C:\Users\machn\OneDrive - Commitstorm\Dokumenty\Wsb\bicep\bicepScript.bicep"
